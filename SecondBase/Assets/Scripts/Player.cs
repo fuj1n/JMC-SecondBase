@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Backspace))
             Typed(-1);
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             Submit();
     }
 
