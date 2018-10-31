@@ -4,8 +4,14 @@ using UnityEngine.U2D;
 [RequireComponent(typeof(PixelPerfectCamera))]
 public class WorldBounds : MonoBehaviour
 {
+    public static WorldBounds instance;
+
+    public Bounds Bounds { get; private set; }
+
     private void Awake()
     {
+        instance = this;
+
         Vector2 extents = GetExtents();
 
         EdgeCollider2D ec2d = gameObject.AddComponent<EdgeCollider2D>();
@@ -21,6 +27,12 @@ public class WorldBounds : MonoBehaviour
         BoxCollider2D bc2d = gameObject.AddComponent<BoxCollider2D>();
         bc2d.isTrigger = true;
         bc2d.size = extents * 2;
+
+        Bounds = new Bounds()
+        {
+            center = transform.position,
+            extents = extents
+        };
     }
 
     private Vector2 GetExtents()

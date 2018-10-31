@@ -11,16 +11,4 @@ public class TimedFader : MonoBehaviour
         foreach (Graphic g in GetComponentsInChildren<Graphic>())
             g.DOColor(g.color - new Color(0, 0, 0, 1), fadeoutTime);
     }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
