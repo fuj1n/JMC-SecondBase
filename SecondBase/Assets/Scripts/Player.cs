@@ -80,6 +80,8 @@ public class Player : MonoBehaviour
         bullet.isValidBinary = IsValidBinary(typed);
         bullet.Text = typed.ToString();
 
+        EventBus.Post(new EventPlayerShoot());
+
         Typed(int.MinValue);
     }
 

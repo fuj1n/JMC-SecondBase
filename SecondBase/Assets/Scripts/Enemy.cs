@@ -54,10 +54,14 @@ public class Enemy : MonoBehaviour
         EventBus.Post(new EventEnemyPassed());
     }
 
-    private void EnemyKilled()
+    private void EnemyHit(Bullet b)
     {
-        Destroy(gameObject);
-        EventBus.Post(new EventEnemyKilled());
+        bool killed = Compare(b);
+
+        if (killed)
+            Destroy(gameObject);
+
+        EventBus.Post(new EventEnemyHit(killed, transform.position));
     }
 
     private bool Compare(Bullet b)
@@ -84,10 +88,8 @@ public class Enemy : MonoBehaviour
         else if (collision.CompareTag("Player"))
         {
             Bullet bullet = collision.GetComponent<Bullet>();
-            if (!bullet)
-                return;
-            if (Compare(bullet))
-                EnemyKilled();
+            if (bullet)
+                EnemyHit(bullet);
         }
     }
 

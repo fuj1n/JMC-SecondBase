@@ -47,8 +47,11 @@ public class EnemySpawner : MonoBehaviour
     }
 
     [SubscribeEvent]
-    public void OnEnemyKilled(EventEnemyKilled e)
+    public void OnEnemyHit(EventEnemyHit e)
     {
+        if (!e.killed)
+            return;
+
         spawnSpeed -= spawnSpeedIncrease;
         enemyMoveSpeed += enemyMoveSpeedIncrease;
     }

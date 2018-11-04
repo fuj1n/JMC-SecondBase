@@ -15,7 +15,10 @@ public class ScoreController : MonoBehaviour
     {
         int score = GameController.Instance.Score;
 
-        if (score != cachedScore)
-            text.text = score.ToString();
+        if (score == cachedScore)
+            return;
+
+        cachedScore = score;
+        text.text = score.ToString();
     }
 }
