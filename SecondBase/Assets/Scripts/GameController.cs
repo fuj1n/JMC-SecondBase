@@ -21,4 +21,10 @@ public class GameController : MonoBehaviour
     {
         CurrentHealth--;
     }
+
+    [SubscribeEvent]
+    public void OnEnemyKilled(EventEnemyKilled e)
+    {
+        // TODO increment score
+    }
 }

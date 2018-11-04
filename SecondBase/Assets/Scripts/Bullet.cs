@@ -5,6 +5,8 @@ public class Bullet : MonoBehaviour
 {
     public float speed;
 
+    public bool isValidBinary;
+
     public string Text
     {
         get

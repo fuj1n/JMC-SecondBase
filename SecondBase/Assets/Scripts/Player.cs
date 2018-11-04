@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -17,24 +18,15 @@ public class Player : MonoBehaviour
 
     private Bullet bullet;
 
-    private string InputText
-    {
-        get
-        {
-            return text.text;
-        }
-        set
-        {
-            text.text = value;
-        }
-    }
+    private int typed;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         text = GetComponentInChildren<TextMeshPro>();
 
-        InputText = "";
+        // Update the typed display
+        Typed(int.MinValue);
     }
 
     private void Update()
@@ -60,31 +52,48 @@ public class Player : MonoBehaviour
 
     private void Typed(int key)
     {
-        if (key < 0)
+        if (key == int.MinValue)
+            typed = 0;
+        if (key < 0 && typed > 0)
         {
-            if (InputText.Length > 0)
-                InputText = InputText.Substring(0, InputText.Length - 1);
+            typed = Mathf.FloorToInt(typed / 10);
+        }
+        else if (key >= 0 && key <= 9)
+        {
+            int test = typed * 10 + key;
 
-            return;
+            if ((IsValidBinary(test) && test <= 11111111) || test < 256)
+                typed = test;
         }
 
-        if (key > 9 || InputText.Length >= 8)
-            return;
-
-        InputText += key;
+        text.text = typed.ToString();
     }
 
     private void Submit()
     {
         if (bullet)
             return;
-        if (InputText.Length <= 0 || InputText.Length > 8)
-            return;
 
         GameObject bulletObject = Instantiate(bulletTemplate, transform.position, bulletTemplate.transform.rotation);
+
         bullet = bulletObject.GetComponent<Bullet>();
-        bullet.Text = InputText;
-        InputText = "";
+        bullet.isValidBinary = IsValidBinary(typed);
+        bullet.Text = typed.ToString();
+
+        Typed(int.MinValue);
+    }
+
+    private bool IsValidBinary(int i)
+    {
+        try
+        {
+            Convert.ToInt32(i.ToString(), 2);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
     // Generates an array of keycodes from ALPHA0-ALPHA9 and from KEYPAD0-KEYPAD9

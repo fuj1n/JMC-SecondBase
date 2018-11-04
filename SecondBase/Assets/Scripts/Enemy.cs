@@ -42,10 +42,8 @@ public class Enemy : MonoBehaviour
         time += Time.deltaTime;
         transform.SetAxisPosition(Utility.Axis.X, hoverX + Mathf.Sin(time) * hoverScale);
 
-        while (time >= Mathf.PI)
+        while (time >= 2 * Mathf.PI)
             time -= 2 * Mathf.PI;
-
-        Debug.Log(time + " " + Mathf.Sin(time));
 
         transform.position += Vector3.down * speed * Time.deltaTime;
     }
@@ -62,19 +60,34 @@ public class Enemy : MonoBehaviour
         EventBus.Post(new EventEnemyKilled());
     }
 
-    private void Compare(string s)
+    private bool Compare(Bullet b)
     {
+        if (!isBinary && !b.isValidBinary) // Enemy is base 10 and the bullet is also base 10
+            return false;
 
+        if (isBinary)
+        {
+            int i = int.Parse(b.Text);
+            return num == i;
+        }
+        else
+        {
+            string bin = b.Text.PadLeft(8, '0');
+            return System.Convert.ToString(num, 2).PadLeft(8, '0').Equals(bin);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Killzone"))
             EnemyPassed();
-        else if (collision.CompareTag("Bullet"))
+        else if (collision.CompareTag("Player"))
         {
             Bullet bullet = collision.GetComponent<Bullet>();
-            Compare(bullet.Text);
+            if (!bullet)
+                return;
+            if (Compare(bullet))
+                EnemyKilled();
         }
     }
 
