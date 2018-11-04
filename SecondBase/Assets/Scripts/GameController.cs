@@ -38,7 +38,12 @@ public class GameController : MonoBehaviour
         CurrentHealth--;
 
         if (CurrentHealth <= 0)
-            SceneManager.LoadScene(0); // TODO game over
+        {
+            if (Score > ScoreStore.HighScore)
+                ScoreStore.HighScore = Score;
+
+            SceneManager.LoadScene("GameOver");
+        }
         else if (lifeDownSound)
             AudioSource.PlayClipAtPoint(lifeDownSound, audioSource);
     }

@@ -1686,7 +1686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e769109f6179a469590255cc7438e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6
+  maxHealth: 4
   enemyDeathSound: {fileID: 8300000, guid: 0ccb06745c52140448277f2b1e73121f, type: 3}
   enemyHitSound: {fileID: 8300000, guid: ec5e71193fae9e9459cdca4e4e307733, type: 3}
   lifeDownSound: {fileID: 8300000, guid: 752c058448cc04f40a3f996ba8f7f837, type: 3}
