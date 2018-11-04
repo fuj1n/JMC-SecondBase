@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class GameController : MonoBehaviour
     public void OnEnemyPassed(EventEnemyPassed e)
     {
         CurrentHealth--;
+
+        if (CurrentHealth <= 0)
+            SceneManager.LoadScene(0); // TODO game over
     }
 
     [SubscribeEvent]
