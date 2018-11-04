@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
 
     public int CurrentHealth { get; private set; }
+    public int Score { get; private set; }
 
     public int maxHealth;
 
@@ -25,6 +26,6 @@ public class GameController : MonoBehaviour
     [SubscribeEvent]
     public void OnEnemyKilled(EventEnemyKilled e)
     {
-        // TODO increment score
+        Score += 1;
     }
 }

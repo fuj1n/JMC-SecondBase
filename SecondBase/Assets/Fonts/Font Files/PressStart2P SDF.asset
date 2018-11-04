@@ -18,12 +18,12 @@ MonoBehaviour:
   m_fontInfo:
     Name: Press Start 2P
     PointSize: 53
-    Scale: 0
+    Scale: 1
     CharacterCount: 97
     LineHeight: 53
     Baseline: 0
     Ascender: 53
-    CapHeight: 0
+    CapHeight: 53
     Descender: 0
     CenterLine: 0
     SuperscriptOffset: 53
@@ -33,7 +33,7 @@ MonoBehaviour:
     UnderlineThickness: 2.6396484
     strikethrough: 19.272728
     strikethroughThickness: 2.6396484
-    TabWidth: 0
+    TabWidth: 530
     Padding: 5
     AtlasWidth: 512
     AtlasHeight: 512
@@ -42,10 +42,10 @@ MonoBehaviour:
   - id: 32
     x: 5
     y: 507
-    width: 0
-    height: 0
+    width: 53
+    height: 53
     xOffset: 0
-    yOffset: 0
+    yOffset: 53
     xAdvance: 53
     scale: 1
   - id: 33
