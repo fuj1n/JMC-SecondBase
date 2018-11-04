@@ -1658,8 +1658,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnSpeed: 5
   spawnSpeedIncrease: 0.1
-  enemyMoveSpeed: 0
-  enemyMoveSpeedIncrease: 0
+  enemyMoveSpeed: 0.25
+  enemyMoveSpeedIncrease: 0.0125
   enemyTemplate: {fileID: 1077796449723894, guid: 8b2f0c483e151ea48b349ba791987fec,
     type: 2}
 --- !u!4 &891586856
@@ -3017,7 +3017,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 320, y: 180}
+  m_ReferenceResolution: {x: 640, y: 360}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

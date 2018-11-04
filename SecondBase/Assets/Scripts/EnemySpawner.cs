@@ -2,6 +2,8 @@
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static float EnemyMoveSpeed { get; private set; }
+
     public float spawnSpeed;
     public float spawnSpeedIncrease;
 
@@ -34,6 +36,8 @@ public class EnemySpawner : MonoBehaviour
 
             Instantiate(enemyTemplate).transform.SetParent(enemyAnchor, true);
         }
+
+        EnemyMoveSpeed = enemyMoveSpeed;
     }
 
     [SubscribeEvent]

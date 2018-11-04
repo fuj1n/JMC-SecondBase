@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 3F;
-
     public float hoverScale = .2F;
 
     private float hoverX;
@@ -45,7 +43,7 @@ public class Enemy : MonoBehaviour
         while (time >= 2 * Mathf.PI)
             time -= 2 * Mathf.PI;
 
-        transform.position += Vector3.down * speed * Time.deltaTime;
+        transform.position += Vector3.down * EnemySpawner.EnemyMoveSpeed * Time.deltaTime;
     }
 
     private void EnemyPassed()
