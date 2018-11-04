@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Killzone
+  - Bullet
   layers:
   - Default
   - TransparentFX

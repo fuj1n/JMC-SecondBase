@@ -10,32 +10,20 @@ public class HeartsController : MonoBehaviour
 
     private Image[] hearts;
 
-    private int cachedHealth = -1337;
+    private int cachedHealth;
 
     private void Start()
     {
         transform2D = GetComponent<RectTransform>();
 
-        transform2D.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 16F);
-        transform2D.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 16F * Mathf.CeilToInt(GameController.Instance.maxHealth / 2F));
-
-        hearts = new Image[Mathf.CeilToInt(GameController.Instance.maxHealth / 2F)];
-
-        for (int i = 0; i < hearts.Length; i++)
-        {
-            GameObject go = new GameObject("Heart " + i);
-
-            RectTransform rect = go.AddComponent<RectTransform>();
-            rect.SetParent(transform2D, false);
-            rect.sizeDelta = new Vector2(16F, 16F);
-
-            hearts[i] = go.AddComponent<Image>();
-            hearts[i].sprite = sprites[2];
-        }
+        SetupHearts();
     }
 
     private void Update()
     {
+        if (Mathf.CeilToInt(GameController.Instance.maxHealth / 2F) != hearts.Length)
+            SetupHearts();
+
         int health = GameController.Instance.CurrentHealth;
         if (health == cachedHealth)
             return;
@@ -59,6 +47,32 @@ public class HeartsController : MonoBehaviour
             {
                 hearts[i].sprite = sprites[0];
             }
+        }
+    }
+
+    private void SetupHearts()
+    {
+        if (hearts != null)
+            foreach (Image heart in hearts)
+                Destroy(heart.gameObject);
+
+        cachedHealth = int.MinValue;
+
+        transform2D.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 16F);
+        transform2D.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 16F * Mathf.CeilToInt(GameController.Instance.maxHealth / 2F));
+
+        hearts = new Image[Mathf.CeilToInt(GameController.Instance.maxHealth / 2F)];
+
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            GameObject go = new GameObject("Heart " + i);
+
+            RectTransform rect = go.AddComponent<RectTransform>();
+            rect.SetParent(transform2D, false);
+            rect.sizeDelta = new Vector2(16F, 16F);
+
+            hearts[i] = go.AddComponent<Image>();
+            hearts[i].sprite = sprites[2];
         }
     }
 

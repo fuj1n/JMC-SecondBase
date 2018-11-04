@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     public AudioClip enemyHitSound;
     public AudioClip lifeDownSound;
     public AudioClip shootSound;
+    public AudioClip powerupSound;
 
     [Header("Prefabs")]
     public GameObject enemyDeathEffect;
@@ -43,6 +44,11 @@ public class GameController : MonoBehaviour
     private void OnApplicationQuit()
     {
         SyncScore();
+    }
+
+    public void Heal(int health)
+    {
+        CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + health);
     }
 
     [SubscribeEvent]
@@ -84,6 +90,13 @@ public class GameController : MonoBehaviour
     {
         if (shootSound)
             AudioSource.PlayClipAtPoint(shootSound, audioSource);
+    }
+
+    [SubscribeEvent]
+    public void OnPowerupPickup(EventPowerupPickup e)
+    {
+        if (powerupSound)
+            AudioSource.PlayClipAtPoint(powerupSound, audioSource);
     }
 
     public void SyncScore()

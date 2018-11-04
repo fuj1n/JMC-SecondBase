@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("Killzone"))
             EnemyPassed();
-        else if (collision.CompareTag("Player"))
+        else if (collision.CompareTag("Bullet"))
         {
             Bullet bullet = collision.GetComponent<Bullet>();
             if (bullet)
