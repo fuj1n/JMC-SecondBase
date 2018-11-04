@@ -4,13 +4,13 @@ using UnityEngine.U2D;
 [RequireComponent(typeof(PixelPerfectCamera))]
 public class WorldBounds : MonoBehaviour
 {
-    public static WorldBounds instance;
+    public static WorldBounds Instance { get; private set; }
 
     public Bounds Bounds { get; private set; }
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
 
         Vector2 extents = GetExtents();
 
