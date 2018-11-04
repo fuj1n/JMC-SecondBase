@@ -32,6 +32,19 @@ public class GameController : MonoBehaviour
         audioSource = Camera.main.transform.position;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Exit();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        SyncScore();
+    }
+
     [SubscribeEvent]
     public void OnEnemyPassed(EventEnemyPassed e)
     {
@@ -39,10 +52,7 @@ public class GameController : MonoBehaviour
 
         if (CurrentHealth <= 0)
         {
-            if (Score > ScoreStore.HighScore)
-                ScoreStore.HighScore = Score;
-
-            SceneManager.LoadScene("GameOver");
+            Exit();
         }
         else if (lifeDownSound)
             AudioSource.PlayClipAtPoint(lifeDownSound, audioSource);
@@ -74,5 +84,17 @@ public class GameController : MonoBehaviour
     {
         if (shootSound)
             AudioSource.PlayClipAtPoint(shootSound, audioSource);
+    }
+
+    public void SyncScore()
+    {
+        if (Score > ScoreStore.HighScore)
+            ScoreStore.HighScore = Score;
+    }
+
+    public void Exit()
+    {
+        SyncScore();
+        SceneManager.LoadScene("GameOver");
     }
 }

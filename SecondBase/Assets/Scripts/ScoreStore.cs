@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-[AddComponentMenu("")]
-public class ScoreStore : MonoBehaviour
+public static class ScoreStore
 {
     private const string ENTRY_KEY = "fuj1n.secondbase.highscore";
 
@@ -25,30 +24,9 @@ public class ScoreStore : MonoBehaviour
         }
         set
         {
-            isHighScore = true;
+            isHighScore = value > PlayerPrefs.GetInt(ENTRY_KEY);
             PlayerPrefs.SetInt(ENTRY_KEY, value);
+            PlayerPrefs.Save();
         }
-    }
-
-    private static ScoreStore Instance;
-
-    private void Start()
-    {
-        if (Instance != this)
-            Destroy(this);
-    }
-
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.Save();
-    }
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void Initialize()
-    {
-        // We need to listen for OnApplicationQuit, so we need an object
-        GameObject go = new GameObject("Score Store Listener");
-        Instance = go.AddComponent<ScoreStore>();
-        DontDestroyOnLoad(go);
     }
 }
