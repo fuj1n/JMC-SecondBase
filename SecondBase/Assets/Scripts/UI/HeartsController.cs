@@ -8,6 +8,7 @@ public class HeartsController : MonoBehaviour
 
     private RectTransform transform2D;
 
+    public float spriteSize = 32F;
     public Sprite[] sprites = { };
 
     private Image[] hearts;
@@ -67,8 +68,8 @@ public class HeartsController : MonoBehaviour
 
         cachedHealth = int.MinValue;
 
-        transform2D.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 16F);
-        transform2D.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 16F * Mathf.CeilToInt(GameController.Instance.maxHealth / 2F));
+        transform2D.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, spriteSize);
+        transform2D.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, spriteSize * Mathf.CeilToInt(GameController.Instance.maxHealth / 2F));
 
         hearts = new Image[Mathf.CeilToInt(GameController.Instance.maxHealth / 2F)];
 
@@ -78,7 +79,7 @@ public class HeartsController : MonoBehaviour
 
             RectTransform rect = go.AddComponent<RectTransform>();
             rect.SetParent(transform2D, false);
-            rect.sizeDelta = new Vector2(16F, 16F);
+            rect.sizeDelta = new Vector2(spriteSize, spriteSize);
 
             hearts[i] = go.AddComponent<Image>();
             hearts[i].sprite = sprites[2];
