@@ -1687,6 +1687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e769109f6179a469590255cc7438e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxMultiplier: 16
   maxHealth: 4
   enemyDeathSound: {fileID: 8300000, guid: 0ccb06745c52140448277f2b1e73121f, type: 3}
   enemyHitSound: {fileID: 8300000, guid: ec5e71193fae9e9459cdca4e4e307733, type: 3}
@@ -3939,6 +3940,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8a0bb00899b9de74a8a3c96ca4454a50, type: 3}
   - {fileID: 21300002, guid: 8a0bb00899b9de74a8a3c96ca4454a50, type: 3}
   - {fileID: 21300004, guid: 8a0bb00899b9de74a8a3c96ca4454a50, type: 3}
+  - {fileID: 21300006, guid: 8a0bb00899b9de74a8a3c96ca4454a50, type: 3}
+  - {fileID: 21300008, guid: 8a0bb00899b9de74a8a3c96ca4454a50, type: 3}
 --- !u!1 &1918748227
 GameObject:
   m_ObjectHideFlags: 0

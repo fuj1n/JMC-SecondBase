@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class HeartsController : MonoBehaviour
 {
+    private const int SPRITES_LENGTH = 5;
+
     private RectTransform transform2D;
 
     public Sprite[] sprites = { };
@@ -33,6 +35,13 @@ public class HeartsController : MonoBehaviour
 
         for (int i = 0; i < hearts.Length; i++)
         {
+            int offset = 0;
+
+            if (i + 1 == hearts.Length && GameController.Instance.maxHealth % 2 != 0)
+            {
+                offset = 3;
+            }
+
             if (partialHealth >= 1)
             {
                 partialHealth -= 1F;
@@ -41,11 +50,11 @@ public class HeartsController : MonoBehaviour
             else if (partialHealth >= 0.5F)
             {
                 partialHealth -= 0.5F;
-                hearts[i].sprite = sprites[1];
+                hearts[i].sprite = sprites[offset + 1];
             }
             else
             {
-                hearts[i].sprite = sprites[0];
+                hearts[i].sprite = sprites[offset + 0];
             }
         }
     }
@@ -78,8 +87,8 @@ public class HeartsController : MonoBehaviour
 
     private void OnValidate()
     {
-        // Ensure sprite array is 3 elements long during edit-time
-        if (sprites.Length != 3)
-            Array.Resize(ref sprites, 3);
+        // Ensure sprite array is x elements long during edit-time
+        if (sprites.Length != SPRITES_LENGTH)
+            Array.Resize(ref sprites, SPRITES_LENGTH);
     }
 }
