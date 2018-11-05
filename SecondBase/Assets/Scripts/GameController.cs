@@ -7,7 +7,9 @@ public class GameController : MonoBehaviour
 
     public int CurrentHealth { get; private set; }
     public int Score { get; private set; }
+    public int Multiplier { get; private set; } = 1;
 
+    public int maxMultiplier = 16;
     public int maxHealth;
 
     private Vector3 audioSource;
@@ -55,6 +57,7 @@ public class GameController : MonoBehaviour
     public void OnEnemyPassed(EventEnemyPassed e)
     {
         CurrentHealth--;
+        Multiplier = 1;
 
         if (CurrentHealth <= 0)
         {
@@ -69,12 +72,14 @@ public class GameController : MonoBehaviour
     {
         if (e.killed)
         {
-            Score += 1;
+            Score += 1 * Multiplier;
 
             if (enemyDeathSound)
                 AudioSource.PlayClipAtPoint(enemyDeathSound, audioSource);
             if (enemyDeathEffect)
                 Instantiate(enemyDeathEffect, e.position, enemyDeathEffect.transform.rotation);
+
+            Multiplier = Mathf.Clamp(Multiplier * 2, 1, maxMultiplier);
         }
         else
         {
@@ -82,6 +87,8 @@ public class GameController : MonoBehaviour
                 AudioSource.PlayClipAtPoint(enemyHitSound, audioSource);
             if (enemyHitEffect)
                 Instantiate(enemyHitEffect, e.position, enemyHitEffect.transform.rotation);
+
+            Multiplier = Mathf.Clamp(Multiplier / 2, 1, maxMultiplier);
         }
     }
 
