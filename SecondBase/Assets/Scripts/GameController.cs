@@ -108,8 +108,7 @@ public class GameController : MonoBehaviour
 
     public void SyncScore()
     {
-        if (Score > ScoreStore.HighScore)
-            ScoreStore.HighScore = Score;
+        ScoreStore.Score = Score;
     }
 
     public void Exit()

@@ -5,6 +5,7 @@ public static class ScoreStore
     private const string ENTRY_KEY = "fuj1n.secondbase.highscore";
 
     private static bool isHighScore = false;
+    private static int score;
 
     public static bool IsHighScore
     {
@@ -13,6 +14,21 @@ public static class ScoreStore
             bool ihs = isHighScore;
             isHighScore = false;
             return ihs;
+        }
+    }
+
+    public static int Score
+    {
+        get
+        {
+            return score;
+        }
+        set
+        {
+            score = value;
+
+            if (value > HighScore)
+                HighScore = Score;
         }
     }
 
