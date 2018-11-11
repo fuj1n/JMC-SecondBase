@@ -17,7 +17,10 @@ public class MultiplierEffectNumber : MonoBehaviour
             return;
 
         TextMeshPro tmp = GetComponent<TextMeshPro>();
-        tmp.text = string.Format(tmp.text, GameController.Instance.Multiplier);
+        if (GameController.Instance.Multiplier > 1)
+            tmp.text = string.Format(tmp.text, GameController.Instance.Multiplier);
+        else
+            tmp.text = "";
 
         direction = new Vector2(Random.Range(-1F, 1F), Random.Range(-1F, 1F));
 
