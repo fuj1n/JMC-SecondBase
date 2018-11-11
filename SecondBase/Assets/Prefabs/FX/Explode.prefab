@@ -231,6 +231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.4
+  aliveTime: 2
+  root: {fileID: 1978854766956258}
 --- !u!198 &198097226011229144
 ParticleSystem:
   m_ObjectHideFlags: 1

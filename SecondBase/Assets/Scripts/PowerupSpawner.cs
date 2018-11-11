@@ -9,9 +9,12 @@ public class PowerupSpawner : MonoBehaviour
     private int killCounter;
     private int specialCounter;
 
+    private Transform anchor;
+
     private void Awake()
     {
         EventBus.Register(this);
+        anchor = GameController.ObjectAnchor;
     }
 
     [SubscribeEvent]
@@ -27,7 +30,7 @@ public class PowerupSpawner : MonoBehaviour
             killCounter = 0;
             specialCounter++;
             GameObject go = Instantiate(powerupTemplate, e.position, powerupTemplate.transform.rotation);
-            go.transform.SetParent(transform, true);
+            go.transform.SetParent(anchor, true);
 
             if (specialCounter >= specialFrequency)
             {

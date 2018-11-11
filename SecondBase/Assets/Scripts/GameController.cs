@@ -12,6 +12,20 @@ public class GameController : MonoBehaviour
     public int maxMultiplier = 16;
     public int maxHealth;
 
+    public static Transform ObjectAnchor
+    {
+        get
+        {
+            if (!objectAnchor)
+            {
+                objectAnchor = new GameObject("Anchor").transform;
+            }
+
+            return objectAnchor;
+        }
+    }
+    private static Transform objectAnchor;
+
     private Vector3 audioSource;
 
     [Space(order = 0)]
@@ -33,6 +47,8 @@ public class GameController : MonoBehaviour
 
         CurrentHealth = maxHealth;
         audioSource = Camera.main.transform.position;
+
+        ObjectAnchor.SetParent(transform, true);
     }
 
     private void Update()
@@ -77,7 +93,7 @@ public class GameController : MonoBehaviour
             if (enemyDeathSound)
                 AudioSource.PlayClipAtPoint(enemyDeathSound, audioSource);
             if (enemyDeathEffect)
-                Instantiate(enemyDeathEffect, e.position, enemyDeathEffect.transform.rotation);
+                Instantiate(enemyDeathEffect, e.position, enemyDeathEffect.transform.rotation).transform.SetParent(ObjectAnchor, true);
 
             Multiplier = Mathf.Clamp(Multiplier * 2, 1, maxMultiplier);
         }
@@ -86,7 +102,7 @@ public class GameController : MonoBehaviour
             if (enemyHitSound)
                 AudioSource.PlayClipAtPoint(enemyHitSound, audioSource);
             if (enemyHitEffect)
-                Instantiate(enemyHitEffect, e.position, enemyHitEffect.transform.rotation);
+                Instantiate(enemyHitEffect, e.position, enemyHitEffect.transform.rotation).transform.SetParent(ObjectAnchor, true);
 
             Multiplier = Mathf.Clamp(Multiplier / 2, 1, maxMultiplier);
         }

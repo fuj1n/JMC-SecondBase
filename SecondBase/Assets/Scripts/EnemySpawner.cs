@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject enemyTemplate;
 
-    private Transform enemyAnchor;
+    private Transform anchor;
 
     private float spawnTimer;
 
@@ -21,9 +21,7 @@ public class EnemySpawner : MonoBehaviour
         EventBus.Register(this);
 
         spawnTimer = spawnSpeed;
-
-        enemyAnchor = new GameObject("Enemy Anchor").transform;
-        enemyAnchor.SetParent(transform, true);
+        anchor = GameController.ObjectAnchor;
     }
 
     private void Update()
@@ -34,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
         {
             spawnTimer = spawnSpeed;
 
-            Instantiate(enemyTemplate).transform.SetParent(enemyAnchor, true);
+            Instantiate(enemyTemplate).transform.SetParent(anchor, true);
         }
 
         EnemyMoveSpeed = enemyMoveSpeed;
@@ -43,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
     [SubscribeEvent]
     public void OnEnemyPassed(EventEnemyPassed e)
     {
-        foreach (Transform t in enemyAnchor)
+        foreach (Transform t in anchor)
             Destroy(t.gameObject);
 
         spawnSpeed += spawnSpeedIncrease * 5;
